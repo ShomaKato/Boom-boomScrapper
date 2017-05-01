@@ -9,12 +9,8 @@
 ///-------------------------------------------------------------------
 
 // ヘッダーファイルのインクルード
-#include <iostream>
-#include <cstdlib>
-#include "cocostudio/CocoStudio.h"
-#include "ui/CocosGUI.h"
-#include "TitleScene.h"
-#include "OverScene.h"
+#include "Scenes\TitleScene.h"
+#include "Scenes\OverScene.h"
 
 // 名前空間
 USING_NS_CC;

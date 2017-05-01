@@ -30,6 +30,8 @@ public:
 	bool init();
 
 	void update(float delta) override;
+
+	//* onTouchBeganのイベントリスナー	
 	bool onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * pEvent);
 
 	//* onButtonClickのイベントリスナー	

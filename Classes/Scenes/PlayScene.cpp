@@ -9,12 +9,34 @@
 ///-------------------------------------------------------------------
 
 // ヘッダーファイルのインクルード
-#include "OverScene.h"
-#include "PlayScene.h"
+#include "Scenes\OverScene.h"
+#include "Scenes\PlayScene.h"
 
 
 // 名前空間
 USING_NS_CC;
+
+//* create関数
+PlayScene* PlayScene::create()
+{
+	//* メモリの確保
+	PlayScene *pRet = new(std::nothrow) PlayScene();
+	//* メモリが確保でき、正常に初期化できたなら
+	if (pRet && pRet->init())
+	{
+		//* 自動開放マネージャに登録
+		pRet->autorelease();
+		//* 初期化したオブジェクトを返す
+		return pRet;
+	}
+	else
+	{
+		//* 初期化でエラーが起きたので、メモリを開放して異常終了
+		delete pRet;
+		pRet = nullptr;
+		return nullptr;
+	}
+}
 
 bool PlayScene::init()
 {

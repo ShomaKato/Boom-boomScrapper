@@ -9,11 +9,9 @@
 ///-------------------------------------------------------------------
 
 // ヘッダーファイルのインクルード
-#include "TitleScene.h"
-#include "PlayScene.h"
-#include "TransitionOriginal.h"
-#include "cocostudio/CocoStudio.h"
-#include "ui/CocosGUI.h"
+#include "Scenes\TitleScene.h"
+#include "Scenes\PlayScene.h"
+#include "Scenes\TransitionOriginal.h"
 
 USING_NS_CC;
 
@@ -49,11 +47,6 @@ bool TitleScene::init()
 		return false;
 	}
 
-	//// 背景画像
-	//Sprite* background = Sprite::create("title.png");
-	//background->setPosition(480, 320);
-	//this->addChild(background);
-
 	// 毎フレーム更新を有効化
 	scheduleUpdate();
 
@@ -77,10 +70,10 @@ void TitleScene::update(float delta)
 // タッチ開始時コールバック
 bool TitleScene::onTouchBegan(Touch* touch, Event* pEvent)
 {
-	// 次のシーンを作成する
-	Scene* nextScene = PlayScene::create();
-	// 次のシーンに移行
-	_director->replaceScene(nextScene);
+	//// 次のシーンを作成する
+	//Scene* nextScene = PlayScene::create();
+	//// 次のシーンに移行
+	//_director->replaceScene(nextScene);
 
 	return true;
 }
