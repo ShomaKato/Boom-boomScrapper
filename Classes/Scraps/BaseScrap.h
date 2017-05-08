@@ -1,8 +1,8 @@
 ///-------------------------------------------------------------------
 //*
-//*	@名前		Player.h
+//*	@名前		BaseScrap.h
 //*
-//*	@作成日		2017/04/15
+//*	@作成日		2017/05/08
 //*
 //*	@著者		加藤 彰馬
 //*
@@ -21,7 +21,7 @@
 //////////////////////////////
 ///　プレイヤクラスの宣言　///
 //////////////////////////////
-class Player : public cocos2d::Layer
+class BaseScrap : public cocos2d::Layer
 {
 private:
 	// スクラップ動作時の、上部分の停止場所
@@ -51,7 +51,7 @@ private:
 
 public:
 	// create関数の宣言と定義
-	static Player* create();
+	static BaseScrap* create();
 
 	// 初期化
 	bool init();

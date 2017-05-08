@@ -1,15 +1,15 @@
 ///-------------------------------------------------------------------
 //*
-//*	@名前		Player.cpp
+//*	@名前		BaseScrap.cpp
 //*
-//*	@作成日		2017/04/15
+//*	@作成日		2017/05/08
 //*
 //*	@著者		加藤 彰馬
 //*
 ///-------------------------------------------------------------------
 
 // ヘッダーファイルのインクルード
-#include "Player\Player.h"
+#include "Scraps\BaseScrap.h"
 
 // cocos2d-xの名前空間
 USING_NS_CC;
@@ -28,7 +28,7 @@ USING_NS_CC;
 ////!
 ////! @戻り値：初期化に成功したか否か(bool)
 ////----------------------------------------------------------------------
-bool Player::init()
+bool BaseScrap::init()
 {
 	// 毎フレーム更新を有効化
 	scheduleUpdate();
@@ -36,10 +36,10 @@ bool Player::init()
 	// イベントリスナーを作成する
 	EventListenerTouchOneByOne* listener = EventListenerTouchOneByOne::create();
 	// イベントリスナーに各コールバック関数をセットする
-	listener->onTouchBegan = CC_CALLBACK_2(Player::onTouchBegan, this);
-	listener->onTouchMoved = CC_CALLBACK_2(Player::onTouchMoved, this);
-	listener->onTouchEnded = CC_CALLBACK_2(Player::onTouchEnded, this);
-	listener->onTouchCancelled = CC_CALLBACK_2(Player::onTouchCancelled, this);
+	listener->onTouchBegan = CC_CALLBACK_2(BaseScrap::onTouchBegan, this);
+	listener->onTouchMoved = CC_CALLBACK_2(BaseScrap::onTouchMoved, this);
+	listener->onTouchEnded = CC_CALLBACK_2(BaseScrap::onTouchEnded, this);
+	listener->onTouchCancelled = CC_CALLBACK_2(BaseScrap::onTouchCancelled, this);
 	// イベントリスナーを登録する
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
@@ -75,7 +75,7 @@ bool Player::init()
 ////!
 ////! @戻り値：なし
 ////----------------------------------------------------------------------
-void Player::update(float delta)
+void BaseScrap::update(float delta)
 {
 
 }
@@ -95,7 +95,7 @@ void Player::update(float delta)
 ////!
 ////! @戻り値：成功or失敗(bool)
 ////----------------------------------------------------------------------
-bool Player::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
+bool BaseScrap::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 {
 	//* アクション中の移動値を取ってくれる関数をif文に利用する
 	isActed = scrapperA->numberOfRunningActions();
@@ -124,7 +124,7 @@ bool Player::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 ////!
 ////! @戻り値：なし
 ////----------------------------------------------------------------------
-void Player::onTouchMoved(cocos2d::Touch * touch, cocos2d::Event * unused_event)
+void BaseScrap::onTouchMoved(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 {
 	//* アクション中の移動値を取ってくれる関数を以下省略
 	isActed = scrapperA->numberOfRunningActions();
@@ -149,7 +149,7 @@ void Player::onTouchMoved(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 ////!
 ////! @戻り値：なし
 ////----------------------------------------------------------------------
-void Player::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * unused_event)
+void BaseScrap::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 {
 	//* アクション中の移動値を取ってくれる関数を以下省略
 	isActed = scrapperA->numberOfRunningActions();
@@ -182,7 +182,7 @@ void Player::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 ////!
 ////! @戻り値：なし
 ////----------------------------------------------------------------------
-void Player::onTouchCancelled(cocos2d::Touch * touch, cocos2d::Event * unused_event)
+void BaseScrap::onTouchCancelled(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 {
 
 }
