@@ -1,6 +1,6 @@
 ///-------------------------------------------------------------------
 //*
-//*	@名前		BaseScrap.cpp
+//*	@名前		ScrapA.cpp
 //*
 //*	@作成日		2017/05/08
 //*
@@ -9,8 +9,8 @@
 ///-------------------------------------------------------------------
 
 // ヘッダーファイルのインクルード
-#include "Player\Player.h"
 #include "Scraps\BaseScrap.h"
+#include "Scraps\ScrapA.h"
 
 // cocos2d-xの名前空間
 USING_NS_CC;
@@ -29,10 +29,17 @@ USING_NS_CC;
 ////!
 ////! @戻り値：初期化に成功したか否か(bool)
 ////----------------------------------------------------------------------
-bool BaseScrap::init()
+bool ScrapA::init()
 {
 	// 毎フレーム更新を有効化
 	scheduleUpdate();
+
+
+	//==========スクラップの設置・表示==========//
+	// スクラップスプライトの作成
+	scrapA = Sprite::create("scrapA.png");
+	this->addChild(scrapA);
+
 
 	// 初期化が正常に終了
 	return true;
@@ -48,8 +55,8 @@ bool BaseScrap::init()
 ////!
 ////! @戻り値：なし
 ////----------------------------------------------------------------------
-void BaseScrap::update(float delta)
+void ScrapA::update(float delta)
 {
-	bool isCrushed;
+
 }
 

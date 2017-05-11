@@ -1,6 +1,6 @@
 ///-------------------------------------------------------------------
 //*
-//*	@名前		BaseScrap.h
+//*	@名前		ScrapA.h
 //*
 //*	@作成日		2017/05/08
 //*
@@ -21,14 +21,14 @@
 //////////////////////////////
 ///　プレイヤクラスの宣言　///
 //////////////////////////////
-class BaseScrap : public cocos2d::Layer
+class ScrapA : public cocos2d::Layer
 {
 private:
 
 
 public:
 	// create関数の宣言と定義
-	static BaseScrap* create();
+	static ScrapA* create();
 
 	// 初期化
 	bool init();
@@ -36,5 +36,8 @@ public:
 	// 更新
 	void update(float delta);
 
+
+	// スクラップ（標的）
+	cocos2d::Sprite* scrapA;
 };
 

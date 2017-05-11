@@ -52,10 +52,15 @@ bool PlayScene::init()
 	scheduleUpdate();
 
 
-	// プレイヤの設置
+	// プレイヤ（スクラッパ）の設置
 	m_player = new Player();
 	this->addChild(m_player);
 	m_player->init();
+
+
+	// 標的（スクラップ）の設置
+	m_scrap = Sprite::create("scrapA.png");
+	this->addChild(m_scrap);
 
 
 	// 初期化が正常に終了
@@ -64,7 +69,19 @@ bool PlayScene::init()
 
 void PlayScene::update(float delta)
 {
+	// プレイヤと標的の矩形を取得
+	Rect r_scrapper = m_player->getBoundingBox();
+	Rect r_scrap = m_scrap->getBoundingBox();
 
+
+	// プレイヤと標的が接触したか否か
+	bool isScraped = r_scrapper.intersectsRect(r_scrap);
+
+	// スクラップできたら標的がアボンする
+	if (isScraped)
+	{
+		m_scrap->setVisible(false);
+	}
 }
 
 //

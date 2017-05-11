@@ -16,13 +16,16 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "Player\Player.h"
+#include "Scraps\ScrapA.h"
 
 
 class PlayScene : public cocos2d::Scene
 {
 private:
 	// プレイヤ
-	Player* m_player;
+	cocos2d::Node* m_player;
+	// 標的
+	cocos2d::Sprite* m_scrap;
 	
 public:
 	// create関数の宣言と定義

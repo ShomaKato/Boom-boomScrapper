@@ -45,7 +45,7 @@
     <ClCompile Include="..\Classes\Scenes\TransitionOriginal.cpp">
       <Filter>src\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Scraps\BaseScrap.cpp">
+    <ClCompile Include="..\Classes\Scraps\ScrapA.cpp">
       <Filter>src\Scraps</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,7 +74,7 @@
     <ClInclude Include="..\Classes\Scenes\TransitionOriginal.h">
       <Filter>src\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Scraps\BaseScrap.h">
+    <ClInclude Include="..\Classes\Scraps\ScrapA.h">
       <Filter>src\Scraps</Filter>
     </ClInclude>
   </ItemGroup>
