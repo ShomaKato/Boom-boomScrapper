@@ -90,10 +90,13 @@ void Player::update(float delta)
 ////!
 ////! @戻り値：プレイヤの矩形(Rect)
 ////----------------------------------------------------------------------
-Rect Player::getBoundingBox()
-{
-	return Rect();
-}
+//Rect Player::getBoundingBox()
+//{
+//	Rect player = scrappers->getBoundingBox();
+//	return Rect();
+//}
+
+
 
 
 

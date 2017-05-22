@@ -25,7 +25,6 @@ class ScrapA : public cocos2d::Layer
 {
 private:
 
-
 public:
 	// create関数の宣言と定義
 	static ScrapA* create();
@@ -35,6 +34,9 @@ public:
 
 	// 更新
 	void update(float delta);
+
+	// どこに出現させるか
+	void SetScrap_pos(float x, float y);
 
 
 	// スクラップ（標的）

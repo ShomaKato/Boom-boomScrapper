@@ -60,7 +60,7 @@ public:
 	void update(float delta);
 
 	// 矩形の取得（オーバーライド）
-	Rect getBoundingBox();
+	//Rect getBoundingBox();
 
 
 	//////////////////////////////
