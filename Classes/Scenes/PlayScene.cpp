@@ -11,12 +11,15 @@
 // ヘッダーファイルのインクルード
 #include "Scenes\OverScene.h"
 #include "Scenes\PlayScene.h"
+#include <time.h>
 
 
 // 名前空間
 USING_NS_CC;
 
-// 
+// 定数
+const int debugPosX = 490;
+const int debugPosY = 320;
 
 
 //* create関数
@@ -79,13 +82,13 @@ bool PlayScene::init()
 
 	// 上側
 	scrapperA = Sprite::create("scrapper.png");
-	scrapperA->setPosition(480, p_initSpotA);
+	scrapperA->setPosition(480, mp_initSpotA);
 	this->addChild(scrapperA);
 	scrappers->addChild(scrapperA);
 
 	// 下側
 	scrapperB = Sprite::create("scrapper.png");
-	scrapperB->setPosition(480, p_initSpotB);
+	scrapperB->setPosition(480, mp_initSpotB);
 	scrapperB->setRotation(180.0f);
 	this->addChild(scrapperB);
 	scrappers->addChild(scrapperB);
@@ -93,11 +96,15 @@ bool PlayScene::init()
 
 
 
+	//==========標的の設置・表示==========//
 
 	// 標的（スクラップ）の設置
-	scrap = Sprite::create("scrapA.png");
-	this->addChild(scrap);
-	scrap->setPosition(300, 400);
+	scrapA = Sprite::create("scrapA.png");
+	this->addChild(scrapA);
+	//scrapA->setPosition(rand() % -50 - 32,rand() % 370 + 120);
+	scrapA->setPosition(debugPosX, debugPosY);
+	
+
 
 
 	// 初期化が正常に終了
@@ -106,21 +113,51 @@ bool PlayScene::init()
 
 void PlayScene::update(float delta)
 {
-	// プレイヤと敵の矩形を取得
-	Rect r_scrapperA = scrapperA->getBoundingBox();
-	Rect r_scrapperB = scrapperB->getBoundingBox();
-	Rect r_scrap = scrap->getBoundingBox();
-
-
-	// プレイヤと標的が接触したか否か
-	bool isScrapedByA = r_scrapperA.intersectsRect(r_scrap);
-	bool isScrapedByB = r_scrapperB.intersectsRect(r_scrap);
-
-	// スクラップできたら標的がアボンする
-	if (isScrapedByA || isScrapedByB)
+	//==========毎フレーム必ず行う更新処理==========//
+	// 標的がまだいるなら諸々の処理を行う
+	if (scrapA != nullptr)
 	{
-		scrap->setVisible(false);
+		// //標的を左から右へ移動させる
+		Vec2 scrapA_pos = scrapA->getPosition();
+		scrapA_pos += Vec2(2.0f, 0);
+		scrapA->setPosition(scrapA_pos);
+
+		// 矩形を取得する	// プレイヤの矩形を取得
+		Rect r_scrapperA = scrapperA->getBoundingBox();
+		Rect r_scrapperB = scrapperB->getBoundingBox();
+		Rect r_scrapA = scrapA->getBoundingBox();
+
+		// プレイヤと標的が接触したか否か
+		bool isScrapedByA = r_scrapperA.intersectsRect(r_scrapA);
+		bool isScrapedByB = r_scrapperB.intersectsRect(r_scrapA);
+
+		// スクラップできたら標的が爆発四散する
+		if (isScrapedByA || isScrapedByB)
+		{
+			Vec2 scrappedSpot(scrapA->getPosition());
+			boom = Sprite::create("boom.png");
+			this->addChild(boom);
+			boom->setPosition(Vec2(scrappedSpot));
+			// 爆発のアクション
+			FadeOut* action1 = FadeOut::create(0.5f);
+			RemoveSelf* action2 = RemoveSelf::create(true);
+			Sequence* action3 = Sequence::create(action1, action2, nullptr);
+
+			scrapA->removeFromParent();
+			scrapA = nullptr;
+			boom->runAction(action3);
+		}
+
 	}
+
+
+	//==========プレイヤ関係の更新処理==========//
+
+
+
+
+
+
 }
 
 
@@ -136,15 +173,15 @@ void PlayScene::update(float delta)
 bool PlayScene::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 {
 	//* アクション中の移動値を取ってくれる関数をif文に利用する
-	p_isActed = scrapperA->numberOfRunningActions();
+	mp_isAction = scrapperA->numberOfRunningActions();
 
-	if (!p_isActed)
+	if (!mp_isAction)
 	{
 		// タッチ座標の取得
 		Vec2 touch_pos = touch->getLocation();
 		// タッチした場所にスクラッパー
-		scrapperA->setPosition(touch_pos.x, p_initSpotA);
-		scrapperB->setPosition(touch_pos.x, p_initSpotB);
+		scrapperA->setPosition(touch_pos.x, mp_initSpotA);
+		scrapperB->setPosition(touch_pos.x, mp_initSpotB);
 
 		return true;
 	}
@@ -165,15 +202,15 @@ bool PlayScene::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_eve
 void PlayScene::onTouchMoved(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 {
 	//* アクション中の移動値を取ってくれる関数を以下省略
-	p_isActed = scrapperA->numberOfRunningActions();
+	mp_isAction = scrapperA->numberOfRunningActions();
 
-	if (!p_isActed)
+	if (!mp_isAction)
 	{
 		// タッチ座標の取得を継続
 		Vec2 touch_pos = touch->getLocation();
 		// スライド場所にもスクラッパー
-		scrapperA->setPosition(touch_pos.x, p_initSpotA);
-		scrapperB->setPosition(touch_pos.x, p_initSpotB);
+		scrapperA->setPosition(touch_pos.x, mp_initSpotA);
+		scrapperB->setPosition(touch_pos.x, mp_initSpotB);
 	}
 }
 
@@ -190,17 +227,17 @@ void PlayScene::onTouchMoved(cocos2d::Touch * touch, cocos2d::Event * unused_eve
 void PlayScene::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 {
 	//* アクション中の移動値を取ってくれる関数を以下省略
-	p_isActed = scrapperA->numberOfRunningActions();
+	mp_isAction = scrapperA->numberOfRunningActions();
 
-	if (!p_isActed)
+	if (!mp_isAction)
 	{
 		// タッチ座標の取得を継続
 		Vec2 touch_pos = touch->getLocation();
-		//　スクラップ動作のアクション
-		MoveTo* actionA1 = MoveTo::create(0.05f, Vec2(touch_pos.x, p_workSpotB));
-		MoveTo* actionA2 = MoveTo::create(0.3f, Vec2(touch_pos.x, p_initSpotA));
-		MoveTo* actionB1 = MoveTo::create(0.05f, Vec2(touch_pos.x, p_workSpotB));
-		MoveTo* actionB2 = MoveTo::create(0.3f, Vec2(touch_pos.x, p_initSpotB));
+		// スクラップ動作のアクション
+		MoveTo* actionA1 = MoveTo::create(0.05f, Vec2(touch_pos.x, mp_workSpotB));
+		MoveTo* actionA2 = MoveTo::create(0.3f, Vec2(touch_pos.x, mp_initSpotA));
+		MoveTo* actionB1 = MoveTo::create(0.05f, Vec2(touch_pos.x, mp_workSpotB));
+		MoveTo* actionB2 = MoveTo::create(0.3f, Vec2(touch_pos.x, mp_initSpotB));
 		DelayTime* actionAB = DelayTime::create(0.15f);
 		Sequence* actionA = Sequence::create(actionA1, actionAB, actionA2, nullptr);
 		Sequence* actionB = Sequence::create(actionB1, actionAB, actionB2, nullptr);
@@ -223,3 +260,16 @@ void PlayScene::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * unused_eve
 void PlayScene::onTouchCancelled(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 {
 }
+
+
+
+
+////----------------------------------------------------------------------
+////! @関数名：PlayBoom
+////!
+////! @役割：
+////!
+////! @引数：タッチ判定(Touch)、イベントタイプ(Event)
+////!
+////! @戻り値：なし
+////----------------------------------------------------------------------

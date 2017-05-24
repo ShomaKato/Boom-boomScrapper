@@ -27,34 +27,38 @@ private:
 	/// プレイヤ用の変数 ///
 	////////////////////////
 	// スクラップ動作時の、上部分の停止場所
-	float p_workSpotA = 340.0f;
+	float mp_workSpotA = 340.0f;
 
 	// スクラップ動作時の、下部分の停止場所
-	float p_workSpotB = 320.0f;
+	float mp_workSpotB = 320.0f;
 
 	// 初期位置へ戻る時の、上部分の停止場所
-	float p_initSpotA = 510.0f;;
+	float mp_initSpotA = 510.0f;;
 
 	// 初期位置へ戻る時の、下部分の停止場所
-	float p_initSpotB = 130.0f;;
+	float mp_initSpotB = 130.0f;;
 
 	// スクラップ動作時の速度
-	float p_workSpeed;
+	float mp_workSpeed;
 
 	// 初期位置へ戻る時の速度
-	float p_initSpeed;
+	float mp_initSpeed;
 
 	// プレイヤの現在位置
-	cocos2d::Vec2 p_playerPos;
+	cocos2d::Vec2 mp_playerPos;
 
 	// アクション中か否か（アクション中なら、どれくらい動いているかの数値が入る）
-	int p_isActed;
+	int mp_isAction;
 	
 
-	//////////////////
-	/// 敵用の変数 ///
-	//////////////////
+	////////////////////
+	/// 標的用の変数 ///
+	////////////////////
 
+	// 敵の初期位置（initでランダム化）
+	int mt_initPos;
+
+	int mt_targetPos;
 
 
 
@@ -88,15 +92,19 @@ public:
 
 
 
-	// 敵（スクラップ）
-	cocos2d::Sprite* scrap;
+	// 敵（スクラップA）
+	cocos2d::Sprite* scrapA;
+	// 敵（スクラップB）
+	cocos2d::Sprite* scrapB;
+	// 敵（スクラップC）
+	cocos2d::Sprite* scrapC;
+	// 敵破壊エフェクト
+	cocos2d::Sprite* boom;
 
 
 
 	// ステージ
 	cocos2d::Sprite* stage;
-
-
 
 };
 
