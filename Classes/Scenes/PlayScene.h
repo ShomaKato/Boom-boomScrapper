@@ -15,12 +15,16 @@
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
+#include "Scenes\OverScene.h"
+#include "Scenes\ClearScene.h"
+
 //#include "Player\Player.h"
 //#include "Scraps\ScrapA.h"
 
 
 class PlayScene : public cocos2d::Scene
 {
+	//const int ENEMY_NUM = 40;
 private:
 
 	////////////////////////
@@ -38,27 +42,35 @@ private:
 	// 初期位置へ戻る時の、下部分の停止場所
 	float mp_initSpotB = 130.0f;;
 
-	// スクラップ動作時の速度
-	float mp_workSpeed;
-
-	// 初期位置へ戻る時の速度
-	float mp_initSpeed;
-
 	// プレイヤの現在位置
 	cocos2d::Vec2 mp_playerPos;
 
 	// アクション中か否か（アクション中なら、どれくらい動いているかの数値が入る）
-	int mp_isAction;
+	int mp_isActing;
 	
 
 	////////////////////
-	/// 標的用の変数 ///
+	/// 敵用の変数 ///
 	////////////////////
 
 	// 敵の初期位置（initでランダム化）
 	int mt_initPos;
 
-	int mt_targetPos;
+	int mt_targetPos;	
+	
+
+	////////////////////
+	/// その他の変数 ///
+	////////////////////
+
+	// スケジューラが上手く使えないので、フレーム数で時間制御する
+	int m_timeCnt;
+
+	// 標的の破壊数カウント変数
+	int m_scrapCnt;
+
+	// 標的の破壊数カウント変数
+	int m_clearCnt;
 
 
 
@@ -78,6 +90,11 @@ public:
 	void update(float delta) override;
 
 
+	// 標的Aの処理
+	void AppearScrapA();
+
+
+
 
 	//////////////////////////////
 	/// スプライト・ノード登録 ///
@@ -93,7 +110,7 @@ public:
 
 
 	// 敵（スクラップA）
-	cocos2d::Sprite* scrapA;
+	cocos2d::Sprite* scrapA[40];
 	// 敵（スクラップB）
 	cocos2d::Sprite* scrapB;
 	// 敵（スクラップC）

@@ -149,6 +149,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\Player\Player.cpp" />
+    <ClCompile Include="..\Classes\Scenes\ClearScene.cpp" />
     <ClCompile Include="..\Classes\Scenes\OverScene.cpp" />
     <ClCompile Include="..\Classes\Scenes\PlayScene.cpp" />
     <ClCompile Include="..\Classes\Scenes\TitleScene.cpp" />
@@ -160,6 +161,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Player\Player.h" />
+    <ClInclude Include="..\Classes\Scenes\ClearScene.h" />
     <ClInclude Include="..\Classes\Scenes\OverScene.h" />
     <ClInclude Include="..\Classes\Scenes\PlayScene.h" />
     <ClInclude Include="..\Classes\Scenes\TitleScene.h" />

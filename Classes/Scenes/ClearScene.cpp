@@ -1,25 +1,24 @@
 ///-------------------------------------------------------------------
 //*
-//*	@作成日		2017/3/15
+//*	@作成日		2017/01/25
 //*
-//*	@名前		TitleScene.cpp
+//*	@名前		ClearScene.cpp
 //*
 //*	@著者		加藤 彰馬
 //*
 ///-------------------------------------------------------------------
 
 // ヘッダーファイルのインクルード
-#include "Scenes\TitleScene.h"
-#include "Scenes\PlayScene.h"
-#include "Scenes\TransitionOriginal.h"
+#include "Scenes\ClearScene.h"
 
+// 名前空間
 USING_NS_CC;
 
 //* create関数
-TitleScene* TitleScene::create()
+ClearScene* ClearScene::create()
 {
 	//* メモリの確保
-	TitleScene *pRet = new(std::nothrow) TitleScene();
+	ClearScene *pRet = new(std::nothrow) ClearScene();
 	//* メモリが確保でき、正常に初期化できたなら
 	if (pRet && pRet->init())
 	{
@@ -37,8 +36,7 @@ TitleScene* TitleScene::create()
 	}
 }
 
-// 初期化
-bool TitleScene::init()
+bool ClearScene::init()
 {
 	// 基底クラスの初期化
 	if (!Scene::init())
@@ -50,40 +48,37 @@ bool TitleScene::init()
 	// 毎フレーム更新を有効化
 	scheduleUpdate();
 
-	// タイトル画面
-	m_title = Sprite::create("title.png");
-	m_title->setPosition(490.0f, 320.0f);
-	this->addChild(m_title);
-
+	// ゲームクリア画面
+	m_clear = Sprite::create("clear.png");
+	m_clear->setPosition(490.0f, 320.0f);
+	this->addChild(m_clear);
 
 	//* onButtonClick
-	// スタートボタンの設置
-	ui::Button* startButton = ui::Button::create("Play-button.png");
-	startButton->setPosition(Vec2(300.0f, 150.0f));
-	this->addChild(startButton);
-	startButton->addClickEventListener(CC_CALLBACK_1(TitleScene::scrapButton, this));
-
-	// 終了ボタンの設置
-	ui::Button* endButton = ui::Button::create("Exit-Button.png");
-	endButton->setPosition(Vec2(660.0f, 150.0f));
-	this->addChild(endButton);
-	endButton->addClickEventListener(CC_CALLBACK_1(TitleScene::exitButton, this));
+	//* ボタンの設置
+	ui::Button* againButton = ui::Button::create("Again-button.png");
+	againButton->setPosition(Vec2(300.0f, 150.0f));
+	this->addChild(againButton);
+	againButton->addClickEventListener(CC_CALLBACK_1(ClearScene::againButton, this));
 
 
+	ui::Button* exitButton = ui::Button::create("Exit-button.png");
+	exitButton->setPosition(Vec2(660.0f, 150.0f));
+	this->addChild(exitButton);
+	exitButton->addClickEventListener(CC_CALLBACK_1(ClearScene::exitButton, this));
 
-	// 初期化が正常終了
+
+	// 初期化が正常に終了
 	return true;
 }
 
-// 毎フレーム更新
-void TitleScene::update(float delta)
+void ClearScene::update(float delta)
 {
-
 }
 
 
+
 // ボタンクリック時コールバック
-bool TitleScene::scrapButton(Ref * ref)
+bool ClearScene::againButton(Ref * ref)
 {
 	// 次のシーンを作成する
 	Scene* nextScene = PlayScene::create();
@@ -93,7 +88,7 @@ bool TitleScene::scrapButton(Ref * ref)
 	return true;
 }
 
-bool TitleScene::exitButton(Ref * ref)
+bool ClearScene::exitButton(Ref * ref)
 {
 	// ボタンが押されたらアプリを終了する
 	Director::getInstance()->end();

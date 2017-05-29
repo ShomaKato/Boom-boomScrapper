@@ -48,6 +48,9 @@
     <ClCompile Include="..\Classes\Scraps\ScrapA.cpp">
       <Filter>src\Scraps</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Scenes\ClearScene.cpp">
+      <Filter>src\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scraps\ScrapA.h">
       <Filter>src\Scraps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scenes\ClearScene.h">
+      <Filter>src\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
